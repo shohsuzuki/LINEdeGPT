@@ -18,6 +18,8 @@ openai.api_key = os.getenv("OPENAI_API_KEY")
 @app.route("/callback", methods=['POST'])
 def callback():
     signature = request.headers['X-Line-Signature']
+    if signature is None:
+        abort(400)
     body = request.get_data(as_text=True)
 
     try:
