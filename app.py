@@ -18,13 +18,16 @@ openai.api_key = os.getenv("OPENAI_API_KEY")
 @app.route("/callback", methods=['POST'])
 def callback():
     signature = request.headers['X-Line-Signature']
+    print("Signature:", signature)
     if signature is None:
+        print("Signature missing!") 
         abort(400)
     body = request.get_data(as_text=True)
     print("Request Body:", body )
     try:
         handler.handle(body, signature)
     except InvalidSignatureError:
+        print("Signature invalid!") 
         abort(400)
 
     return 'OK'
