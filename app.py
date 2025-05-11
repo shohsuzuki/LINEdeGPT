@@ -43,6 +43,13 @@ def callback():
 
 @handler.add(MessageEvent, message=TextMessage)
 def handle_message(event):
+　　secret = os.getenv("LINE_CHANNEL_SECRET")
+    reply = f"SECRET is: {secret}"
+
+    line_bot_api.reply_message(
+        event.reply_token,
+        TextSendMessage(text=reply)
+    )
     user_text = event.message.text
 
     response = openai.ChatCompletion.create(
