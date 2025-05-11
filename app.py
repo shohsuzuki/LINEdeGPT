@@ -15,6 +15,8 @@ line_bot_api = LineBotApi(os.getenv("LINE_CHANNEL_ACCESS_TOKEN"))
 handler = WebhookHandler(os.getenv("LINE_CHANNEL_SECRET"))
 openai.api_key = os.getenv("OPENAI_API_KEY")
 
+import traceback
+
 @app.route("/callback", methods=['POST'])
 def callback():
     signature = request.headers('X-Line-Signature')
@@ -29,6 +31,11 @@ def callback():
     except InvalidSignatureError:
         print("Signature invalid!") 
         abort(400)
+
+    except Exception as e:
+        print("🔥 Unexpected Error:")
+        traceback.print_exc()
+        abort(500)
 
     return 'OK'
 
