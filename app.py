@@ -19,7 +19,7 @@ import traceback
 
 @app.route("/callback", methods=['POST'])
 def callback():
-    signature = request.headers('X-Line-Signature')
+    signature = request.headers.get('X-Line-Signature')
     print("Signature:", signature)
     if signature is None:
         print("Signature missing!") 
