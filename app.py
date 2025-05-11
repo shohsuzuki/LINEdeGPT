@@ -28,29 +28,17 @@ def callback():
         abort(400)
     body = request.get_data(as_text=True)
     print("Request Body:", body )
-    #try:
-    #    handler.handle(body, signature)
-    #except InvalidSignatureError:
-    #    print("Signature invalid!") 
-    #    abort(400)
-
-    #except Exception as e:
-    #    print("🔥 Unexpected Error:")
-    #    traceback.print_exc()
-    #    abort(500)
+    try:
+        handler.handle(body, signature)
+    except InvalidSignatureError:
+        print("Signature invalid!") 
+        abort(400)
 
 
     return 'OK'
 
 @handler.add(MessageEvent, message=TextMessage)
 def handle_message(event):
-    secret = os.getenv("LINE_CHANNEL_SECRET")
-    reply = f"SECRET is: {secret}"
-
-    line_bot_api.reply_message(
-        event.reply_token,
-        TextSendMessage(text=reply)
-    )
     user_text = event.message.text
 
     response = openai.ChatCompletion.create(
