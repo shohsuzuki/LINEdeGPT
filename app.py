@@ -9,7 +9,7 @@ from linebot.models import MessageEvent, TextMessage, TextSendMessage
 
 load_dotenv()
 print("DEBUG LINE_CHANNEL_SECRET:", os.getenv("LINE_CHANNEL_SECRET"))
-
+print("LINE_CHANNEL_ACCESS_TOKEN:", os.getenv("LINE_CHANNEL_ACCESS_TOKEN"))
 
 app = Flask(__name__)
 
@@ -28,6 +28,7 @@ def callback():
         abort(400)
     body = request.get_data(as_text=True)
     print("Request Body:", body )
+    print("Headers:", dict(request.headers)) 
     try:
         handler.handle(body, signature)
     except InvalidSignatureError:
