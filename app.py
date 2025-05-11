@@ -28,16 +28,17 @@ def callback():
         abort(400)
     body = request.get_data(as_text=True)
     print("Request Body:", body )
-    try:
-        handler.handle(body, signature)
-    except InvalidSignatureError:
-        print("Signature invalid!") 
-        abort(400)
+    #try:
+    #    handler.handle(body, signature)
+    #except InvalidSignatureError:
+    #    print("Signature invalid!") 
+    #    abort(400)
 
-    except Exception as e:
-        print("🔥 Unexpected Error:")
-        traceback.print_exc()
-        abort(500)
+    #except Exception as e:
+    #    print("🔥 Unexpected Error:")
+    #    traceback.print_exc()
+    #    abort(500)
+
 
     return 'OK'
 
