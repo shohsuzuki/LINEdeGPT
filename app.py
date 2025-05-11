@@ -43,7 +43,7 @@ def callback():
 
 @handler.add(MessageEvent, message=TextMessage)
 def handle_message(event):
-　　secret = os.getenv("LINE_CHANNEL_SECRET")
+    secret = os.getenv("LINE_CHANNEL_SECRET")
     reply = f"SECRET is: {secret}"
 
     line_bot_api.reply_message(
