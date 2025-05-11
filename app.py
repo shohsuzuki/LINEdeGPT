@@ -8,6 +8,8 @@ from linebot.exceptions import InvalidSignatureError
 from linebot.models import MessageEvent, TextMessage, TextSendMessage
 
 load_dotenv()
+print("DEBUG LINE_CHANNEL_SECRET:", os.getenv("LINE_CHANNEL_SECRET"))
+
 
 app = Flask(__name__)
 
